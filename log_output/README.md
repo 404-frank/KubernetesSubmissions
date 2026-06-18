@@ -34,5 +34,5 @@ and apply the deployment:
 kubectl apply -f manifests/deployment.yaml
 ```
 
-#### funny isn't, somoe pods are spinning up:
+#### funny isn't, two more pods are spinning up:
 ![alt text](https://raw.githubusercontent.com/404-frank/KubernetesSubmissions/main/log_output/screenshots/Screenshot_2026-06-18_20-40-37.png "four pods running")
