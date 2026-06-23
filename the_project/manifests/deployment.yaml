@@ -14,4 +14,4 @@ spec:
     spec:
       containers:
         - name: todo-app
-          image: twodogwalker/todo-app:0.1
+          image: twodogwalker/todo-app:0.3
