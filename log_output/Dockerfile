@@ -1,6 +1,16 @@
 FROM python:3.14-alpine
 
-WORKDIR /usr/src/app
-COPY start.py ./
+RUN apk update && apk add bash
 
-CMD [ "python", "-u", "./start.py" ]
+WORKDIR /usr/src/app
+COPY listener.py ./
+COPY start.py ./
+COPY globals.py ./
+COPY bash_start.sh ./
+
+EXPOSE 5000
+
+# CMD [ "python", "-u", "./listener.py" ]
+# CMD [ "python", "-u", "./start.py" ]
+ENTRYPOINT ["nohup", "/usr/src/app/bash_start.sh"]
+CMD ["sleep", "infinity"]
