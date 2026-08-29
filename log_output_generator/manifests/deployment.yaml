@@ -1,0 +1,32 @@
+# Please edit the object below. Lines beginning with a '#' will be ignored,
+# and an empty file will abort the edit. If an error occurs while saving this file will be
+# reopened with the relevant failures.
+#
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: log-output-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: log-output-app
+  template:
+    metadata:
+      labels:
+        app: log-output-app
+    spec:
+      volumes:
+        - name: shared-image
+          emptyDir: {}
+      containers:
+        - name: log-output-generator-container
+          image: twodogwalker/log-output-generator:0.2
+          volumeMounts:
+          - name: shared-image
+            mountPath: /usr/src/app/files
+        - name: log-output-listener-container
+          image: twodogwalker/log-output-listener:0.2
+          volumeMounts:
+          - name: shared-image
+            mountPath: /usr/src/app/files
