@@ -19,6 +19,6 @@ with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
     while True:
        conn, addr = s.accept()
        print(f"got a connection from {addr}")
-       output_string = "current log string: <br /><br />" + globals.get_random_string()
+       output_string = f"{globals.get_stamp()} <br /><br />Ping / Pongs: {globals.get_counter()}"
        conn.sendall(build_response(200, output_string))
        conn.close()

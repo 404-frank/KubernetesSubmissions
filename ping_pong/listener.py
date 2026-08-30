@@ -1,9 +1,9 @@
 import socket
 import os
+import globals
 
 HOST = ""  # Standard loopback interface address (localhost)
 PORT = 5100  # Port to listen on (non-privileged ports are > 1023)
-ping_pong_counter = 0
 
 def build_response(status_code, body, content_type='text/html'):
     # Build the HTTP response
@@ -19,7 +19,8 @@ with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
     while True:
        conn, addr = s.accept()
        print(f"got a connection from {addr}")
-       ping_pong_counter += 1
+       ping_pong_counter = globals.get_counter() + 1
        output_string = "ping pong, counter: <br /><br />" + str(ping_pong_counter)
        conn.sendall(build_response(200, output_string))
        conn.close()
+       globals.set_counter(ping_pong_counter)
