@@ -10,7 +10,5 @@ COPY bash_start.sh ./
 
 EXPOSE 5000
 
-# CMD [ "python", "-u", "./listener.py" ]
-# CMD [ "python", "-u", "./start.py" ]
 ENTRYPOINT ["nohup", "/usr/src/app/bash_start.sh"]
 CMD ["sleep", "infinity"]

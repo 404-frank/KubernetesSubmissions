@@ -1,10 +1,14 @@
 
 
-def set_random_string(r : str):
-    with open('vars.txt', 'w') as vars_file:
-        vars_file.write(r)
+def set_stamp(r : str):
+    with open('sharedfiles/stamp.txt', 'w') as stamp_file:
+        stamp_file.write(r)
 
     
-def get_random_string() -> str:
-    with open('vars.txt', 'r') as vars_file:
-        return vars_file.read()
+def get_stamp() -> str:
+    with open('sharedfiles/stamp.txt', 'r') as stamp_file:
+        return stamp_file.read()
+    
+def get_counter() -> int:
+    with open('sharedfiles/counter.txt', 'r') as counter_file:
+        return counter_file.read()
