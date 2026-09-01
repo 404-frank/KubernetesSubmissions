@@ -12,6 +12,20 @@ spec:
       labels:
         app: todo-app
     spec:
+      volumes:
+        - name: shared-image
+          persistentVolumeClaim:
+            claimName: the-project-claim
       containers:
         - name: todo-app
-          image: twodogwalker/todo-app:0.3
+          image: twodogwalker/todo-app:0.8
+          volumeMounts:
+          - name: shared-image
+            mountPath: /usr/app/static/sharedfiles
+      initContainers:
+      - name: volume-mount-hack
+        image: busybox
+        command: ["sh", "-c", "chmod 777 /usr/app/static/sharedfiles"]
+        volumeMounts:
+        - name: shared-image
+          mountPath: /usr/app/static/sharedfiles

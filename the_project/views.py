@@ -1,4 +1,6 @@
 from flask import render_template
+import functions
 
 def index():
-    return render_template("index.html", title="Home")
+    image_url = functions.get_image_url()
+    return render_template("index.html", image_url=image_url, title="Home")

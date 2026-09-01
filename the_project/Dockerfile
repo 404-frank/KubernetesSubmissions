@@ -20,8 +20,9 @@ COPY . .
 
 ENV LISTENING_PORT=3000
 RUN useradd -m appuser && \
-    chown appuser .
+    chown -R appuser *
 USER appuser
+
 
 ENV PATH="/usr/app/venv/bin:$PATH"
 ENTRYPOINT ["./boot.sh"]
