@@ -1,38 +1,7 @@
-<!doctype html>
-<html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <title>Frank Prins</title>
-        <link rel="stylesheet" href="/static/site.css" />
-    </head>
-    <body>
-        <header>
-            <h2>ToDo App</h2>
-        </header>
+{% extends "base.html" %}
 
-        <main>
-            <section id="about" style="text-align: center">
-                <div>
-                    <img
-                        src="{{image_url}}"
-                        alt="image from picsum"
-                        style="
-                            display: block;
-                            margin: 1rem auto;
-                            max-width: 400px;
-                            width: 100%;
-                            height: auto;
-                            border-radius: 8px;
-                            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-                        "
-                    />
-                </div>
-                <div style="margin-top: 200px;">
-  
-                </div>
-            </section>
-        </main>
-        <footer>&copy; 2026 Frank Prins</footer>
-    </body>
-</html>
+{% block todolist %}
+                    <div class="bg-gray-200 w-full max-w-[750px] border-l-4 border-green-500 pl-4 py-2">
+                        <p class="font-bold text-left">repeating</p>
+                    </div>
+{% endblock %}

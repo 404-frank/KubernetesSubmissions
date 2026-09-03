@@ -1,6 +1,6 @@
 #!/bin/sh
 
-if [${LISTENING_PORT} -eq '']
+if [ -z ${LISTENING_PORT} ];
    then LISTENING_PORT=3000
 fi
 

@@ -18,14 +18,15 @@ spec:
             claimName: the-project-claim
       containers:
         - name: todo-app
-          image: twodogwalker/todo-app:0.8
+          image: twodogwalker/todo-app:0.10
           volumeMounts:
           - name: shared-image
             mountPath: /usr/app/static/sharedfiles
-      initContainers:
-      - name: volume-mount-hack
-        image: busybox
-        command: ["sh", "-c", "chmod 777 /usr/app/static/sharedfiles"]
-        volumeMounts:
-        - name: shared-image
-          mountPath: /usr/app/static/sharedfiles
+      # only necessary when the mount needs to be reactivated
+      # initContainers:
+      # - name: volume-mount-hack
+      #   image: busybox
+      #   command: ["sh", "-c", "chmod 777 /usr/app/static/sharedfiles"]
+      #   volumeMounts:
+      #   - name: shared-image
+      #     mountPath: /usr/app/static/sharedfiles
