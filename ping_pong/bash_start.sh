@@ -22,3 +22,5 @@ sleep 20
 
 log "Initialization complete, starting application"
 exec "$@"
+
+while true; sleep 60; done

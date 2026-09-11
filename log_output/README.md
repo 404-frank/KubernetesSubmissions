@@ -8,11 +8,12 @@ kubectl apply -f manifests/persistentvolume.yaml
 kubectl apply -f manifests/persistentvolumeclaim.yaml
 ```
 
-### and the deployment of the service, ingress, and containers:
+### and the deployment of the services, ingress, and containers:
 #### (with this deployment, also the pingpong container is included)
 
 ```
 kubectl apply -f manifests/service.yaml
+kubectl apply -f ./ping_pong/manifests/service.yaml
 kubectl apply -f manifests/ingress.yaml
 kubectl apply -f manifests/deployment.yaml
 ```

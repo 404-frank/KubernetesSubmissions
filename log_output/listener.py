@@ -1,24 +1,37 @@
-import socket
-import os
+from http.server import BaseHTTPRequestHandler, HTTPServer
+import requests
 import globals
 
 HOST = ""  # Standard loopback interface address (localhost)
 PORT = 5000  # Port to listen on (non-privileged ports are > 1023)
+PINGS_URL = 'http://127.0.0.1:5100/pings'
 
-def build_response(status_code, body, content_type='text/html'):
-    # Build the HTTP response
-    status_line = f"HTTP/1.1 {status_code}\r\n"
-    headers = f"Content-Type: {content_type}\r\nContent-Length: {len(body)}\r\n"
-    response = f"{status_line}{headers}\r\n{body}"
-    return response.encode()
+class SimpleHTTPRequestHandler(BaseHTTPRequestHandler):
 
-with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
-    s.bind((HOST, PORT))
-    s.listen(5)
-    print(f"server is listening on port {PORT}" )
-    while True:
-       conn, addr = s.accept()
-       print(f"got a connection from {addr}")
-       output_string = f"{globals.get_stamp()} <br /><br />Ping / Pongs: {globals.get_counter()}"
-       conn.sendall(build_response(200, output_string))
-       conn.close()
+    def do_GET(self):
+        content_type = self.headers.get('Content-Type', 'text/html')
+        if self.path == '/log':
+            print(f"got a connection on {self.path}")
+            pingpong_counter = self.get_counter()
+            self.send_response(200)
+            self.send_header('Content-type', content_type)
+            self.end_headers()
+            body = f"{globals.get_stamp()} <br /><br />Ping / Pongs: {pingpong_counter}"
+            self.wfile.write(self.create_response(body))
+        else:
+            self.send_response(404)
+            self.send_header('Content-type', content_type)
+            self.end_headers()
+            self.wfile.write(self.create_response("path not found"))
+
+    def get_counter(self) -> str:
+        req = requests.get(PINGS_URL)
+        return req.content.decode("UTF-8")
+
+    def create_response(self, body :str) -> bytes:
+        response = f"{body}"
+        return response.encode()
+
+
+httpd = HTTPServer((HOST, PORT), SimpleHTTPRequestHandler)
+httpd.serve_forever()

@@ -16,21 +16,11 @@ spec:
       labels:
         app: log-output-app
     spec:
-      volumes:
-        - name: shared-image
-          persistentVolumeClaim:
-            claimName: log-output-claim
       containers:
         - name: log-output-container
-          image: twodogwalker/log-output:0.8
+          image: twodogwalker/log-output:0.21
           imagePullPolicy: IfNotPresent
-          volumeMounts:
-          - name: shared-image
-            mountPath: /usr/src/app/sharedfiles
         - name: ping-pong-container
-          image: twodogwalker/ping-pong-app:0.7
+          image: twodogwalker/ping-pong-app:0.12
           imagePullPolicy: IfNotPresent
-          volumeMounts:
-          - name: shared-image
-            mountPath: /usr/src/app/sharedfiles
 

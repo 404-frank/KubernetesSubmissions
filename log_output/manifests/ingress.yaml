@@ -20,3 +20,10 @@ spec:
                 name: ping-pong-app-service
                 port:
                   number: 2347
+          - path: /pings
+            pathType: Prefix
+            backend:
+              service:
+                name: ping-pong-app-service
+                port:
+                  number: 2347

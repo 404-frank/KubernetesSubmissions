@@ -5,6 +5,7 @@ RUN apk update && apk add bash
 WORKDIR /usr/src/app
 COPY globals.py ./
 COPY listener.py ./
+COPY counter.txt ./
 COPY bash_start.sh ./
 
 EXPOSE 5100

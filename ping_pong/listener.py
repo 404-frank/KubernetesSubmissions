@@ -1,26 +1,38 @@
-import socket
-import os
+from http.server import HTTPServer, BaseHTTPRequestHandler
 import globals
 
 HOST = ""  # Standard loopback interface address (localhost)
 PORT = 5100  # Port to listen on (non-privileged ports are > 1023)
 
-def build_response(status_code, body, content_type='text/html'):
-    # Build the HTTP response
-    status_line = f"HTTP/1.1 {status_code}\r\n"
-    headers = f"Content-Type: {content_type}\r\nContent-Length: {len(body)}\r\n"
-    response = f"{status_line}{headers}\r\n{body}"
-    return response.encode()
+class SimpleHTTPRequestHandler(BaseHTTPRequestHandler):
 
-with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
-    s.bind((HOST, PORT))
-    s.listen(5)
-    print(f"server is listening on port {PORT}" )
-    while True:
-       conn, addr = s.accept()
-       print(f"got a connection from {addr}")
-       ping_pong_counter = globals.get_counter() + 1
-       output_string = "ping pong, counter: <br /><br />" + str(ping_pong_counter)
-       conn.sendall(build_response(200, output_string))
-       conn.close()
-       globals.set_counter(ping_pong_counter)
+    def do_GET(self):
+        content_type = self.headers.get('Content-Type', 'text/html')
+        if self.path == '/pingpong':
+            print(f"got a connection from {self.path}")
+            ping_pong_counter = globals.get_counter() + 1
+            globals.set_counter(ping_pong_counter)
+            body = "ping pong, counter: <br /><br />" + str(ping_pong_counter)
+            self.send_response(200)
+            self.send_header('Content-type', content_type)
+            self.end_headers()
+            print(f"calling create_response with this param: [{body}]")
+            self.wfile.write(self.create_response(body))
+        elif self.path == '/pings':
+            self.send_response(200)
+            self.send_header('Content-type', content_type)
+            self.end_headers()
+            self.wfile.write(self.create_response(str(globals.get_counter())))
+        else:
+            self.send_response(404)
+            self.send_header('Content-type', content_type)
+            self.end_headers()
+            self.wfile.write(self.create_response("path not found"))
+
+    def create_response(self, body :str) -> bytes:
+        response = f"{body}"
+        return response.encode()
+
+
+httpd = HTTPServer((HOST, PORT), SimpleHTTPRequestHandler)
+httpd.serve_forever()
