@@ -12,7 +12,8 @@ kubectl apply -f manifests/persistentvolumeclaim.yaml
 #### (with this deployment)
 
 ```
-kubectl apply -f manifests/service.yaml
+kubectl apply -f manifests/service_todo_backend.yaml
+kubectl apply -f manifests/service_todo.yaml
 kubectl apply -f manifests/ingress.yaml
 kubectl apply -f manifests/deployment.yaml
 ```

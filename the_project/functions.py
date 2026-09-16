@@ -2,6 +2,8 @@ import os
 from datetime import datetime
 import requests
 IMG_URL = "/usr/app/static/sharedfiles/temp_image.png"
+# IMG_URL = "/home/frank/Applications/KubernetesPlayground/KubernetesSubmissions/the_project/static/temp_image.png"
+TODO_BACKEND_URL = 'http://localhost:3001/todos'
 
 def get_image_url():
     if image_too_old(IMG_URL):
@@ -24,3 +26,10 @@ def retrieve_new_image():
     image_data = response.content
     with open(IMG_URL, 'wb') as handler:
         handler.write(image_data)
+
+def get_todos() -> list:
+    response = requests.get(TODO_BACKEND_URL, headers={"User-Agent": "Mozilla/5.0"})
+    decoded_response = response.content.decode("UTF-8")
+    todo_list = eval(decoded_response)
+    # strip empty lines
+    return [item for item in todo_list if item.strip()]

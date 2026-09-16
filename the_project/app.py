@@ -3,12 +3,12 @@ import views
 import os
 
 # print startup info
-listen_on = os.environ.get('LISTENING_PORT', 'NOT FOUND')
+listen_on = os.environ.get('LISTENING_PORT', '3000')
 print(f"Flask server is starting, listening on port: [{listen_on}]")
 
 
 app = Flask(__name__)
-app.add_url_rule('/', view_func=views.index)
+app.add_url_rule('/', view_func=views.index, methods=['GET', 'POST'])
 
 
 if __name__ == '__main__':

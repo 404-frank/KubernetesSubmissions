@@ -26,10 +26,11 @@
                     class="block w-full max-w-[200px] mt-8 mb-8 rounded-lg" />
 
                 <div class="w-full flex justify-center items-center">
-                    <form class="w-full max-w-[500px] flex items-center gap-2">
-                        <label for="todo-input" class="sr-only">Enter a new todo</label>
-                        <input id="todo-input" type="text" placeholder="Enter a new todo (max 140 characters)"
-                            class="w-full px-4 py-2 border border-green-500 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500">
+                    <form id=todoInputForm method="post" class=" w-full max-w-[500px] flex items-center gap-2">
+                        <label for="todoinput" class="sr-only">Enter a new todo</label>
+                        <input id="todoinput" name='todoinput' type="text" required maxlength="140"
+                            placeholder="Enter a new todo (max 140 characters)"
+                            class="w-full px-4 py-2 border border-green-500 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500" />
                         <button type="submit"
                             class="bg-green-500 text-white px-4 py-2 rounded-md hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-500">
                             Send
@@ -37,7 +38,40 @@
                     </form>
                 </div>
 
-                
+                <script>
+
+                    const form = document.getElementById('todoInputForm');
+
+                    form.addEventListener('submit', async (e) => {
+                        e.preventDefault(); // Prevent default form submission (no navigation)
+
+                        const todo = document.getElementById('todoinput').value;
+                        console.log(todo)
+
+                        try {
+                            // Send data to Express server via POST
+                            const response = fetch('/todos', {
+                                method: 'POST',
+                                body: JSON.stringify({ 'todo': todo })
+
+                            });
+
+                            const data = await response;
+                            console.log(response.ok == true)
+                            if (response.ok) {
+                                console.log('response ok, clear form')
+                                form.reset(); // Clear form
+                                window.location.reload();
+                            } else {
+                                console.log('response nok')
+                                form.reset(); // Clear form
+                                window.location.reload();
+                            }
+                        } catch (error) {
+                            console.log('fetch gave an error')
+                        }
+                    });
+                </script>
 
                 <div class="w-full flex flex-col gap-2 items-left mt-5">
                     <div class="text-2xl mt-5 ml-5">ToDo's</div>
