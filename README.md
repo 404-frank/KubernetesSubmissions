@@ -15,5 +15,8 @@
 - [1.11](https://github.com/404-frank/KubernetesSubmissions/tree/1.11/log_output)
 - [1.12](https://github.com/404-frank/KubernetesSubmissions/tree/1.12/the_project)
 - [1.13](https://github.com/404-frank/KubernetesSubmissions/tree/1.13/the_project)
+
+### Chapter 3 exercises
 - [2.1](https://github.com/404-frank/KubernetesSubmissions/tree/2.1/log_output)
 - [2.2](https://github.com/404-frank/KubernetesSubmissions/tree/2.2/the_project)
+- [2.3](https://github.com/404-frank/KubernetesSubmissions/tree/2.3/log_output)
