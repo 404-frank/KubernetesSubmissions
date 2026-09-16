@@ -13,7 +13,7 @@ kubectl apply -f manifests/persistentvolumeclaim.yaml
 
 ```
 kubectl apply -f manifests/service.yaml
-kubectl apply -f ./ping_pong/manifests/service.yaml
+kubectl apply -f ../ping_pong/manifests/service.yaml
 kubectl apply -f manifests/ingress.yaml
 kubectl apply -f manifests/deployment.yaml
 ```
