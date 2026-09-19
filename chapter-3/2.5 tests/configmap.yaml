@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  namespace: exercises
+  name: example-configmap
+data:
+  information.txt: |
+    deze tekst komt vanuit een file
+  message: hallo wereld

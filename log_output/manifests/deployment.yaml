@@ -17,11 +17,22 @@ spec:
       labels:
         app: log-output-app
     spec:
+      volumes:
+        - name: shared-files
+          configMap:
+            name: log-output-configmap
       containers:
         - name: log-output-container
-          image: twodogwalker/log-output:0.21
+          image: twodogwalker/log-output:0.28
           imagePullPolicy: IfNotPresent
+          envFrom:
+            - configMapRef:
+                name: log-output-configmap
+          volumeMounts:          
+          - name: shared-files
+            mountPath: /usr/src/app/shared
         - name: ping-pong-container
           image: twodogwalker/ping-pong-app:0.12
           imagePullPolicy: IfNotPresent
+
 

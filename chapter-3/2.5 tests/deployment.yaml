@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: exercises
+  name: test-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: test-app
+  template:
+    metadata:
+      labels:
+        app: test-app
+    spec:
+      volumes:
+        - name: shared-files
+          # persistentVolumeClaim:
+          #   claimName: the-test-claim
+          configMap:
+            name: example-configmap
+      containers:
+        - name: test-app-container
+          image: python
+          imagePullPolicy: IfNotPresent
+          command: 
+            - /bin/sh
+            - "-c"
+            # - "cd /usr/app/sharedfiles"
+            - "sleep infinity"
+          envFrom:
+            - configMapRef:
+                name: example-configmap
+          volumeMounts:          
+          - name: shared-files
+            mountPath: /usr/app/sharedfiles
