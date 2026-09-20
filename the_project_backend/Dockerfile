@@ -8,7 +8,5 @@ COPY globals.py ./
 COPY todos.txt ./
 COPY bash_start.sh ./
 
-EXPOSE 3001
-
 ENTRYPOINT ["nohup", "/usr/src/app/bash_start.sh"]
 CMD ["sleep", "infinity"]

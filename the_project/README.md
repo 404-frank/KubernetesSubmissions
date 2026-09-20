@@ -8,10 +8,11 @@ kubectl apply -f manifests/persistentvolume.yaml
 kubectl apply -f manifests/persistentvolumeclaim.yaml
 ```
 
-### and the deployment of the service, ingress, and containers:
+### and the deployment of the configMap, service, ingress, and containers:
 #### (with this deployment)
 
 ```
+kubectl apply -f manifests/configmap.yaml
 kubectl apply -f manifests/service_todo_backend.yaml
 kubectl apply -f manifests/service_todo.yaml
 kubectl apply -f manifests/ingress.yaml

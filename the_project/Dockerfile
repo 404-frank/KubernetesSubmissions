@@ -18,7 +18,6 @@ WORKDIR /usr/app
 COPY --from=build-stage /usr/app/venv ./venv
 COPY . .
 
-ENV LISTENING_PORT=3000
 RUN useradd -m appuser && \
     chown -R appuser *
 USER appuser

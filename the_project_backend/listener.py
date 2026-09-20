@@ -5,8 +5,8 @@ from http.server import BaseHTTPRequestHandler, HTTPServer
 from urllib.parse import urlparse, parse_qs
 import globals
 
-HOST = ""  # Standard loopback interface address (localhost)
-PORT = 3001  # Port to listen on (non-privileged ports are > 1023)
+HOST = os.environ.get('BACKEND_SERVER_LISTENING_URL', '')
+PORT = int(os.environ.get('BACKEND_SERVER_LISTENING_PORT', '3000'))
 
 class SimpleHTTPRequestHandler(BaseHTTPRequestHandler):
 

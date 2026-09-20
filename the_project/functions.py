@@ -1,15 +1,15 @@
 import os
 from datetime import datetime
 import requests
-IMG_URL = "/usr/app/static/sharedfiles/temp_image.png"
-# IMG_URL = "/home/frank/Applications/KubernetesPlayground/KubernetesSubmissions/the_project/static/temp_image.png"
-TODO_BACKEND_URL = 'http://localhost:3001/todos'
+LOCAL_IMAGE_STORE_URL = os.environ['LOCAL_IMAGE_STORE_URL']
+LOCAL_IMAGE_WEBSERVER_URL = os.environ['LOCAL_IMAGE_WEBSERVER_URL']
+REMOTE_IMAGE_RETRIEVAL_URL = os.environ['REMOTE_IMAGE_RETRIEVAL_URL']
 
 def get_image_url():
-    if image_too_old(IMG_URL):
+    if image_too_old(os.environ['LOCAL_IMAGE_STORE_URL']):
         # get new one
         retrieve_new_image()
-    return "/static/sharedfiles/temp_image.png"
+    return LOCAL_IMAGE_WEBSERVER_URL
 
 
 def image_too_old(imageFileName: str) -> bool:
@@ -21,14 +21,13 @@ def image_too_old(imageFileName: str) -> bool:
     return True
 
 def retrieve_new_image():
-    url = 'https://picsum.photos/1200'
-    response = requests.get(url, headers={"User-Agent": "Mozilla/5.0"})
+    response = requests.get(REMOTE_IMAGE_RETRIEVAL_URL, headers={"User-Agent": "Mozilla/5.0"})
     image_data = response.content
-    with open(IMG_URL, 'wb') as handler:
+    with open(os.environ['LOCAL_IMAGE_STORE_URL'], 'wb') as handler:
         handler.write(image_data)
 
 def get_todos() -> list:
-    response = requests.get(TODO_BACKEND_URL, headers={"User-Agent": "Mozilla/5.0"})
+    response = requests.get(os.environ['BACKEND_SERVER_URL'], headers={"User-Agent": "Mozilla/5.0"})
     decoded_response = response.content.decode("UTF-8")
     todo_list = eval(decoded_response)
     # strip empty lines

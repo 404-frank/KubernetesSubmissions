@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  namespace: project
+  name: the-project-configmap
+data:
+  SERVER_LISTENING_URL: "0.0.0.0"
+  SERVER_LISTENING_PORT: "3000"
+  # if empty URL will lsiten on default Standard loopback interface address (localhost)
+  BACKEND_SERVER_LISTENING_URL: ""
+  BACKEND_SERVER_LISTENING_PORT: "3001"
+  BACKEND_SERVER_URL: "http://localhost:3001/todos"
+  LOCAL_IMAGE_STORE_URL: "/usr/app/static/sharedfiles/temp_image.png"
+  LOCAL_IMAGE_WEBSERVER_URL: "/static/sharedfiles/temp_image.png"
+  REMOTE_IMAGE_RETRIEVAL_URL: "https://picsum.photos/1200"
