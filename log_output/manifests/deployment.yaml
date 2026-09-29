@@ -32,7 +32,16 @@ spec:
           - name: shared-files
             mountPath: /usr/src/app/shared
         - name: ping-pong-container
-          image: twodogwalker/ping-pong-app:0.12
+          image: twodogwalker/ping-pong-app:0.18
           imagePullPolicy: IfNotPresent
+          env:
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: postgres-secret
+                  key: password
+          envFrom:
+            - configMapRef:
+                name: pingpong-configmap
 
 

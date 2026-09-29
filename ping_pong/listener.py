@@ -10,8 +10,7 @@ class SimpleHTTPRequestHandler(BaseHTTPRequestHandler):
         content_type = self.headers.get('Content-Type', 'text/html')
         if self.path == '/pingpong':
             print(f"got a connection from {self.path}")
-            ping_pong_counter = globals.get_counter() + 1
-            globals.set_counter(ping_pong_counter)
+            ping_pong_counter = globals.update_and_get_counter()
             body = "ping pong, counter: <br /><br />" + str(ping_pong_counter)
             self.send_response(200)
             self.send_header('Content-type', content_type)

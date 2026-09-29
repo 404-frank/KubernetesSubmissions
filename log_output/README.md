@@ -12,6 +12,8 @@ kubectl apply -f manifests/persistentvolumeclaim.yaml
 #### (with this deployment, also the pingpong container is included)
 
 ```
+kubectl apply -f manifests/configmap.yaml
+kubectl apply -f ../ping_pong/manifests/configmap.yaml
 kubectl apply -f manifests/service.yaml
 kubectl apply -f ../ping_pong/manifests/service.yaml
 kubectl apply -f manifests/ingress.yaml

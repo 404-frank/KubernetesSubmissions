@@ -1,12 +1,17 @@
 FROM python:3.14-alpine
 
-RUN apk update && apk add bash
-
 WORKDIR /usr/src/app
-COPY globals.py ./
-COPY listener.py ./
-COPY counter.txt ./
-COPY bash_start.sh ./
+
+RUN apk update && \
+    apk add libpq-dev && \
+    apk add bash
+COPY requirements.txt .
+RUN pip install --upgrade pip && \
+    pip install --upgrade setuptools wheel && \
+    pip install --no-cache-dir --upgrade -r requirements.txt
+
+COPY . .
+RUN rm requirements.txt
 
 EXPOSE 5100
 
