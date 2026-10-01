@@ -27,7 +27,13 @@ spec:
             - configMapRef:
                 name: the-project-configmap
         - name: todo-app-backend
-          image: twodogwalker/todo-app-backend:0.4
+          image: twodogwalker/todo-app-backend:0.11
+          env:
+            - name: MONGODB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: mongodb-secrets
+                  key: password
           envFrom:
             - configMapRef:
                 name: the-project-configmap

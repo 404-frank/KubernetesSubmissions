@@ -13,3 +13,10 @@ data:
   LOCAL_IMAGE_STORE_URL: "/usr/app/static/sharedfiles/temp_image.png"
   LOCAL_IMAGE_WEBSERVER_URL: "/static/sharedfiles/temp_image.png"
   REMOTE_IMAGE_RETRIEVAL_URL: "https://picsum.photos/1200"
+
+  MONGODB_HOSTNAME: mongodb
+  MONGODB_PORT: "27017"
+  MONGODB_USERNAME: admin 
+
+  # mongodb server
+  MONGO_INITDB_ROOT_USERNAME: admin
