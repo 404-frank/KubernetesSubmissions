@@ -77,7 +77,7 @@
                     <div class="text-2xl mt-5 ml-5">ToDo's</div>
                     {% for todo in todo_list %}
                     <div class="bg-gray-200 w-full max-w-[750px] border-l-4 border-green-500 pl-4 py-2">
-                        <p class="font-bold text-left">{{todo}}</p>
+                        <p class="font-bold text-left">{{todo | safe}}</p>
                     </div>
                     {% endfor %}
                 </div>

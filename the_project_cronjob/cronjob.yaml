@@ -1,0 +1,25 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  namespace: project
+  name: add-wikipedia-todo
+spec:
+  schedule: "0 * * * *"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - name: add-wikipedia-todo
+            image: twodogwalker/todo-app-cronjob:0.5
+            imagePullPolicy: IfNotPresent
+            env:
+              - name: MONGODB_PASSWORD
+                valueFrom:
+                  secretKeyRef:
+                    name: mongodb-secrets
+                    key: password
+            envFrom:
+              - configMapRef:
+                  name: the-project-configmap
+          restartPolicy: OnFailure

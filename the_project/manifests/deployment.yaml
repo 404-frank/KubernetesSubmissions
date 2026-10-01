@@ -19,7 +19,7 @@ spec:
             claimName: the-project-claim
       containers:
         - name: todo-app
-          image: twodogwalker/todo-app:0.30
+          image: twodogwalker/todo-app:0.31
           volumeMounts:
           - name: shared-image
             mountPath: /usr/app/static/sharedfiles
