@@ -43,16 +43,23 @@ class SimpleHTTPRequestHandler(BaseHTTPRequestHandler):
 
             content_length = int(self.headers.get('Content-Length', 0))
             content_type = self.headers.get('Content-Type', 0)
-            print(f"content length: {content_length}")
-            print(f"content type: {content_type}")
+            # print(f"content length: {content_length}")
+            # print(f"content type: {content_type}")
             post_data = self.rfile.read(content_length).decode('UTF-8')
-            print(f"post_data : {post_data}")
+            print(f"todo_message_posted : {post_data}")
             todo = json.loads(post_data)['todo']
-            globals.add_todo(todo)
-            self.send_response(200)
-            self.send_header('Content-type', "text/html")
-            self.end_headers()
-            self.wfile.write(self.create_response("ok"))
+            if len(todo) > 140:
+                self.send_response(413)
+                self.send_header('Content-type', "text/html")
+                self.end_headers()
+                print(f"ERROR, content length is larger than 140 characters, content: {todo}")
+                self.wfile.write(self.create_response("ERROR, content length is larger than 140 characters"))
+            else:
+                globals.add_todo(todo)
+                self.send_response(200)
+                self.send_header('Content-type', "text/html")
+                self.end_headers()
+                self.wfile.write(self.create_response("ok"))
         else:
             self.send_response(404)
             self.send_header('Content-type', "text/html")
