@@ -23,7 +23,7 @@ spec:
             name: log-output-configmap
       containers:
         - name: log-output-container
-          image: twodogwalker/log-output:0.28
+          image: twodogwalker/log-output:0.33
           imagePullPolicy: IfNotPresent
           envFrom:
             - configMapRef:
@@ -32,7 +32,7 @@ spec:
           - name: shared-files
             mountPath: /usr/src/app/shared
         - name: ping-pong-container
-          image: twodogwalker/ping-pong-app:0.18
+          image: twodogwalker/ping-pong-app:0.19
           imagePullPolicy: IfNotPresent
           env:
             - name: POSTGRES_PASSWORD

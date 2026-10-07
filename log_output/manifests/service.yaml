@@ -4,10 +4,10 @@ metadata:
   namespace: exercises
   name: log-output-app-service
 spec:
-  type: ClusterIP
+  type: NodePort
   selector:
     app: log-output-app
   ports:
-    - port: 2346
+    - port: 80
       protocol: TCP
       targetPort: 5000

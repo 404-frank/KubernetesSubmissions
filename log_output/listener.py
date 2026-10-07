@@ -11,7 +11,13 @@ class SimpleHTTPRequestHandler(BaseHTTPRequestHandler):
 
     def do_GET(self):
         content_type = self.headers.get('Content-Type', 'text/html')
-        if self.path == '/log':
+        if self.path == '/':
+            print(f"got a connection on {self.path}")
+            self.send_response(200)
+            self.send_header('Content-type', content_type)
+            self.end_headers()
+            self.wfile.write(self.create_response("200 OK"))
+        elif self.path == '/log':
             print(f"got a connection on {self.path}")
             self.send_response(200)
             self.send_header('Content-type', content_type)
@@ -24,6 +30,7 @@ class SimpleHTTPRequestHandler(BaseHTTPRequestHandler):
             body = f"{file_content}<br />{env_variabele}<br />{globals.get_stamp()}<br />Ping / Pongs: {pingpong_counter}"
             self.wfile.write(self.create_response(body))
         else:
+            print(f"in error catch: path {self.path}")
             self.send_response(404)
             self.send_header('Content-type', content_type)
             self.end_headers()

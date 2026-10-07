@@ -8,7 +8,14 @@ class SimpleHTTPRequestHandler(BaseHTTPRequestHandler):
 
     def do_GET(self):
         content_type = self.headers.get('Content-Type', 'text/html')
-        if self.path == '/pingpong':
+
+        if self.path == '/':
+            print(f"got a connection on {self.path}")
+            self.send_response(200)
+            self.send_header('Content-type', content_type)
+            self.end_headers()
+            self.wfile.write(self.create_response("200 OK"))
+        elif self.path == '/pingpong':
             print(f"got a connection from {self.path}")
             ping_pong_counter = globals.update_and_get_counter()
             body = "ping pong, counter: <br /><br />" + str(ping_pong_counter)
