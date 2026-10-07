@@ -18,6 +18,15 @@ spec:
         app: ping-pong-app
     spec:
       containers:
-        - image: twodogwalker/ping-pong-app:0.1
+        - name: ping-pong-container
+          image: twodogwalker/ping-pong-app:0.18
           imagePullPolicy: IfNotPresent
-          name: ping-pong-container
+          env:
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: postgres-secret
+                  key: password
+          envFrom:
+            - configMapRef:
+                name: pingpong-configmap

@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  namespace: exercises
+  name: pingpong-svc-loadbalancer
+spec:
+  type: LoadBalancer # This should be the only unfamiliar part
+  selector:
+    app: ping-pong-app
+  ports:
+    - port: 80
+      protocol: TCP
+      targetPort: 5100

@@ -1,3 +1,5 @@
+# switch user to 'postgres'!
+
 CREATE DATABASE franksdb;
 
 \c franksdb

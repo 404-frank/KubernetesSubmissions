@@ -27,3 +27,7 @@
 - [2.8](https://github.com/404-frank/KubernetesSubmissions/tree/2.8/the_project)
 - [2.9](https://github.com/404-frank/KubernetesSubmissions/tree/2.9/the_project)
 - [2.10](https://github.com/404-frank/KubernetesSubmissions/tree/2.10/the_project_monitoring)
+
+### Chapter 4 exercises
+- [3.1, (and also look into the folder 'chapter4/exercise_3.1')](https://github.com/404-frank/KubernetesSubmissions/tree/3.1/ping_pong)
+
