@@ -29,9 +29,9 @@ kubectl apply -f manifests/deployment.yaml
 ```
 
 ### and here we are:
-![alt text](https://github.com/404-frank/KubernetesSubmissions/tree/3.1/chapter4/exercise_3.1/screenshots/Screenshot_2026-10-07_20-39-07.png "the pings output")
+![alt text](https://raw.githubusercontent.com/404-frank/KubernetesSubmissions/refs/tags/3.1/chapter4/exercise_3.1/screenshots/Screenshot_2026-10-07_20-39-07.png "the pings output")
 
-![alt text](https://github.com/404-frank/KubernetesSubmissions/tree/3.1/chapter4/exercise_3.1/screenshots/Screenshot_2026-10-07_20-25-07.png "the pingpong output")
+![alt text](https://raw.githubusercontent.com/404-frank/KubernetesSubmissions/refs/tags/3.1/chapter4/exercise_3.1/screenshots/Screenshot_2026-10-07_20-39-25.png "the pingpong output")
 
 ### Deletion
 After use, this will get rid of the cluster again:
