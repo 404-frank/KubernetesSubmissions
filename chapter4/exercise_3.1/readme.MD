@@ -33,6 +33,12 @@ kubectl apply -f manifests/deployment.yaml
 
 ![alt text](https://raw.githubusercontent.com/404-frank/KubernetesSubmissions/refs/tags/3.1/chapter4/exercise_3.1/screenshots/Screenshot_2026-10-07_20-39-25.png "the pingpong output")
 
+
+### enable the gateway, for exercise 3.3
+```
+gcloud container clusters update dwk-cluster --location=europe-west4 --gateway-api=standard
+```
+
 ### Deletion
 After use, this will get rid of the cluster again:
 ```
