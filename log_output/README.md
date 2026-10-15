@@ -32,6 +32,7 @@ kubectl apply -f manifests/service.yaml
 kubectl apply -f ../ping_pong/manifests/service.yaml
 kubectl apply -f manifests/gateway.yaml
 kubectl apply -f ../ping_pong/manifests/route.yaml
+kubectl apply -f ../ping_pong/manifests/route-redirect.yaml
 kubectl apply -f manifests/route.yaml
 kubectl apply -f manifests/deployment.yaml
 

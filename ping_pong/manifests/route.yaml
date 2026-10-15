@@ -10,7 +10,7 @@ spec:
   - matches:
     - path:
         type: PathPrefix
-        value: /pingpong
+        value: /give-me-a-ping-pong
     - path:
         type: PathPrefix
         value: /pings

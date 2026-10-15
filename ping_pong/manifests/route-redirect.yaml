@@ -1,0 +1,20 @@
+apiVersion: gateway.networking.k8s.io/v1beta1
+kind: HTTPRoute
+metadata:
+  namespace: exercises
+  name: ping-pong-redirect-route
+spec:
+  parentRefs:
+  - name: my-gateway
+  rules:
+    - matches:
+        - path:
+            type: PathPrefix
+            value: /pingpong
+      filters:
+        - type: RequestRedirect
+          requestRedirect:
+            path:
+              type: ReplacePrefixMatch
+              replacePrefixMatch: /give-me-a-ping-pong
+            statusCode: 302
