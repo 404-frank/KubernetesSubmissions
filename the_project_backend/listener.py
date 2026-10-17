@@ -12,6 +12,12 @@ class SimpleHTTPRequestHandler(BaseHTTPRequestHandler):
 
     def do_GET(self):
         content_type = self.headers.get('Content-Type', 'text/html')
+        if self.path == '/':
+            print(f"got a connection on {self.path}")
+            self.send_response(200)
+            self.send_header('Content-type', content_type)
+            self.end_headers()
+            self.wfile.write(self.create_response("200 OK"))
         if self.path == '/todos':
             print(f"got a GET connection on {self.path}")
             self.send_response(200)

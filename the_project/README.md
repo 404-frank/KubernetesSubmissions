@@ -1,21 +1,22 @@
 # todo-app
 
-### deployment being done with:
-
-### deployment of the persistent volume is being done with:
-```
-kubectl apply -f manifests/persistentvolume.yaml
-kubectl apply -f manifests/persistentvolumeclaim.yaml
-```
-
-### and the deployment of the configMap, service, ingress, and containers:
-#### (with this deployment)
+### deployment being done with Kustomize:
 
 ```
-kubectl apply -f manifests/configmap.yaml
-kubectl apply -f manifests/service_todo_backend.yaml
-kubectl apply -f manifests/service_todo.yaml
-kubectl apply -f manifests/ingress.yaml
-kubectl apply -f manifests/deployment.yaml
+kubectl apply -k .
+```
+
+### other handy commands:
+
+```
+show what would be done, for testing:
+kubectl kustomize .
+
+delete all again:
+kubectl delete -k .
+
+inspect on the cluster, use an extra pod:
+kubectl run -it --rm test --image=busybox --restart=Never --env="POD_NAMESPACE=project"  -- sh
+
 ```
 
