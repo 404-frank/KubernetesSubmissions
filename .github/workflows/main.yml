@@ -62,7 +62,7 @@ jobs:
       
       - name: Deploy
         run: |-
-          kustomize edit set image todo-app=$IMAGE_TAG
+          kustomize edit set image dwk-gke/todo-app=$IMAGE_TAG
           kustomize build . | kubectl apply -f -
           # kubectl rollout status deployment $SERVICE
           kubectl get services -o wide
