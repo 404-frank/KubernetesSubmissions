@@ -16,7 +16,6 @@ env:
   IMAGE: dwk-environments
   SERVICE: dwk-environments
   BRANCH: ${{ github.ref_name }}
-  ACTIONS_RUNNER_DEBUG: true
 
 # ...
 jobs:
