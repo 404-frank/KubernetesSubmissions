@@ -16,7 +16,6 @@ env:
   IMAGE: todo-app
   SERVICE: todo-app-deployment
   BRANCH: ${{ github.ref_name }}
-  NAMESPACE: ${GITHUB_REF#refs/heads/}
 
 # ...
 jobs:
@@ -63,8 +62,10 @@ jobs:
 
       - name: Define correct namespace
         run: |
-          if [[ $NAMESPACE == 'main' ]]; then
+          if [[ $BRANCH == 'main' ]]; then
               echo "NAMESPACE=project" >> "$GITHUB_ENV"
+          else
+              echo "NAMESPACE=$BRANCH" >> "$GITHUB_ENV"
           fi
           echo "namespace to be used: $NAMESPACE"
       
