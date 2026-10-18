@@ -14,7 +14,7 @@ env:
   REGISTRY: europe-west4-docker.pkg.dev
   REPOSITORY: my-repository
   IMAGE: todo-app
-  SERVICE: todo-app-service
+  SERVICE: todo-app
   BRANCH: ${{ github.ref_name }}
 
 # ...
