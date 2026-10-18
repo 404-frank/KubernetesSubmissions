@@ -16,6 +16,7 @@ env:
   IMAGE: todo-app
   SERVICE: todo-app-deployment
   BRANCH: ${{ github.ref_name }}
+  NAMESPACE: ${GITHUB_REF#refs/heads/}
 
 # ...
 jobs:
@@ -59,9 +60,19 @@ jobs:
       
       - name: Set up Kustomize
         uses: imranismail/setup-kustomize@v3
+
+      - name: Define correct namespace
+        run: |
+          if [[ $NAMESPACE == 'main' ]]; then
+              echo "NAMESPACE=project" >> "$GITHUB_ENV"
+          fi
+          echo "namespace to be used: $NAMESPACE"
       
       - name: Deploy
         run: |-
+          kubectl create namespace $NAMESPACE || true
+          kubectl config set-context --current --namespace=$NAMESPACE
+          kustomize edit set namespace $NAMESPACE
           kustomize edit set image dwk-gke/todo-app=$IMAGE_TAG
           kustomize build . | kubectl apply -f -
           # kubectl rollout status deployment $SERVICE
