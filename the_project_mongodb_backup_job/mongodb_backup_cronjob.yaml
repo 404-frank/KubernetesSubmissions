@@ -1,0 +1,37 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  namespace: project
+  name: mongodb-backup
+spec:
+  schedule: "0 2 * * *"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - name: mongodb-backup
+            image: twodogwalker/mongodb-backup-cronjob:0.15
+            imagePullPolicy: IfNotPresent
+            env:
+              - name: MONGODB_PASSWORD
+                valueFrom:
+                  secretKeyRef:
+                    name: mongodb-secrets
+                    key: password
+            envFrom:
+              - configMapRef:
+                  name: the-project-configmap
+            volumeMounts:          
+              - name: sa-secret
+                mountPath: /usr/src/app/config/credentials.json
+                subPath: dwk-gke-510518-71c74749d7e8.json
+                readOnly: true
+          volumes:
+            - name: sa-secret
+              secret:
+                secretName: storage-sa-key
+                items:
+                  - key: dwk-gke-510518-71c74749d7e8.json
+                    path: dwk-gke-510518-71c74749d7e8.json
+          restartPolicy: Never
