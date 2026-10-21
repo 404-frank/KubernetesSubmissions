@@ -13,6 +13,14 @@ spec:
           - name: mongodb-backup
             image: twodogwalker/mongodb-backup-cronjob:0.15
             imagePullPolicy: IfNotPresent
+            # resources
+            resources:
+              requests:
+                memory: "32Mi"
+                cpu: "125m"
+              limits:
+                memory: "64Mi"
+                cpu: "250m"
             env:
               - name: MONGODB_PASSWORD
                 valueFrom:
