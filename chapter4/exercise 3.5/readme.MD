@@ -1,4 +1,4 @@
-## Actionsn for a clean setup of the cluster.
+## Actions for a clean setup of the cluster.
 
 ### lets start with the cluster creation:
 With my account I got issues with not enough resources being available, so I scaled down the number of nodes to '2'.
@@ -19,7 +19,7 @@ kubectl config use-context <new context>
 
 ```
 
-### we need the namespace for deployment of ping-pong:
+### we need the namespace for deployment of the project:
 ```
 kubectl create namespace project
 ```
@@ -34,7 +34,6 @@ kubectl apply -k .
 ```
 kubectl get svc
 ```
-
 
 ### Deletion
 After use, this will get rid of the cluster again:
