@@ -7,7 +7,7 @@ See below for all actions taken
 I looked around in the GKE dashboard and was able to find the logs, here is how it looked when adding a todo:
 
 
-![alt text](https://raw.githubusercontent.com/404-frank/KubernetesSubmissions/refs/tags/3.12/chapter4/exercise_3.12/screenshots/Screenshot_2026-10-23_15-06-35.png "the pingpong output")
+![alt text](https://raw.githubusercontent.com/404-frank/KubernetesSubmissions/refs/tags/3.12/chapter4/exercise_3.12/screenshots/Screenshot_2026-10-23_15-06-35.png "the log output")
 
 
 ***
