@@ -1,5 +1,7 @@
 # log output app
 
+### now contains a healthz probe on both the log_output and ping_pong container
+
 ### deployment being done with:
 
 ### deployment of the persistent volume is being done with:

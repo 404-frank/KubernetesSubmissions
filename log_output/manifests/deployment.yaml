@@ -23,7 +23,7 @@ spec:
             name: log-output-configmap
       containers:
         - name: log-output-container
-          image: twodogwalker/log-output:0.33
+          image: twodogwalker/log-output:0.40
           imagePullPolicy: IfNotPresent
           envFrom:
             - configMapRef:
@@ -31,8 +31,14 @@ spec:
           volumeMounts:          
           - name: shared-files
             mountPath: /usr/src/app/shared
+          readinessProbe:
+            initialDelaySeconds: 10 # Initial delay until the readiness is tested
+            periodSeconds: 10 # How often to test
+            httpGet:
+               path: /healthz
+               port: 5000
         - name: ping-pong-container
-          image: twodogwalker/ping-pong-app:0.20
+          image: twodogwalker/ping-pong-app:0.28
           imagePullPolicy: IfNotPresent
           env:
             - name: POSTGRES_PASSWORD
@@ -43,5 +49,11 @@ spec:
           envFrom:
             - configMapRef:
                 name: pingpong-configmap
+          readinessProbe:
+            initialDelaySeconds: 10 # Initial delay until the readiness is tested
+            periodSeconds: 10 # How often to test
+            httpGet:
+               path: /healthz
+               port: 5100
 
 

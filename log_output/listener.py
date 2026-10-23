@@ -17,6 +17,14 @@ class SimpleHTTPRequestHandler(BaseHTTPRequestHandler):
             self.send_header('Content-type', content_type)
             self.end_headers()
             self.wfile.write(self.create_response("200 OK"))
+        # health check
+        if self.path == '/healthz':
+            print(f"got a connection on {self.path}, health check")
+            pingpong_healthy = self.ping_pong_health_check()
+            self.send_response(200 if pingpong_healthy else 500)
+            self.send_header('Content-type', content_type)
+            self.end_headers()
+            self.wfile.write(self.create_response("200 OK" if pingpong_healthy else "500 NOT OK"))
         elif self.path == '/log':
             print(f"got a connection on {self.path}")
             self.send_response(200)
@@ -36,9 +44,20 @@ class SimpleHTTPRequestHandler(BaseHTTPRequestHandler):
             self.end_headers()
             self.wfile.write(self.create_response("path not found"))
 
+    # check if the response of get pings is integer
+    def ping_pong_health_check(self) -> bool:
+        try:
+            int(self.get_counter())
+        except ValueError:
+            return False
+        return True
+
     def get_counter(self) -> str:
-        req = requests.get(PINGS_URL)
-        return req.content.decode("UTF-8")
+        try:
+            req = requests.get(PINGS_URL)
+            return req.content.decode("UTF-8")
+        except requests.exceptions.RequestException:
+            return "ERROR"
 
     def create_response(self, body :str) -> bytes:
         response = f"{body}"

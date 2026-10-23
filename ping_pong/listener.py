@@ -15,6 +15,14 @@ class SimpleHTTPRequestHandler(BaseHTTPRequestHandler):
             self.send_header('Content-type', content_type)
             self.end_headers()
             self.wfile.write(self.create_response("200 OK"))
+        # health check
+        if self.path == '/healthz':
+            print(f"got a connection on {self.path}, health check")
+            database_healthy = globals.check_database_health()
+            self.send_response(200 if database_healthy else 500)
+            self.send_header('Content-type', content_type)
+            self.end_headers()
+            self.wfile.write(self.create_response("200 OK" if database_healthy else "500 NOT OK"))
         # the original catch of /pingpong
         elif self.path == '/pingpong':
             print(f"got a connection on {self.path}")
@@ -36,10 +44,12 @@ class SimpleHTTPRequestHandler(BaseHTTPRequestHandler):
             print(f"calling create_response with this param: [{body}]")
             self.wfile.write(self.create_response(body))
         elif self.path == '/pings':
-            self.send_response(200)
+            counter = str(globals.get_counter())
+            self.send_response(200 if counter != None else 500)
             self.send_header('Content-type', content_type)
             self.end_headers()
-            self.wfile.write(self.create_response(str(globals.get_counter())))
+            self.wfile.write(self.create_response(counter))
+
         else:
             self.send_response(404)
             self.send_header('Content-type', content_type)
