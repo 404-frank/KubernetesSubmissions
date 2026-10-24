@@ -1,0 +1,29 @@
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  namespace: project
+  name: the-project-http-route
+spec:
+  parentRefs:
+    - name: public-gateway
+  # hostnames:
+  #   - "www.example.com"
+  rules:
+    - backendRefs:
+        - kind: Service
+          name: todo-app-service
+          port: 2345
+          weight: 1
+      matches:
+        - path:
+            type: PathPrefix
+            value: /
+    - backendRefs:
+        - kind: Service
+          name: todo-app-backend-service
+          port: 2346
+          weight: 1
+      matches:
+        - path:
+            type: PathPrefix
+            value: /todos

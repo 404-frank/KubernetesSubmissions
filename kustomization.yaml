@@ -1,15 +1,33 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 resources:
+  # lets start with the name spaces:
+  - the_project/manifests/the_project_namespace_gateway.yaml
+  - the_project/manifests/the_project_namespace.yaml
+
+  # and some configmaps and secrets
+  - the_project_mongodb/mongodb_secret.yaml
+  - the_project/manifests/configmap.yaml
+  
+  # persistant volume
   - the_project/manifests/persistentvolume.yaml
   - the_project/manifests/persistentvolumeclaim.yaml
-  - the_project_mongodb/mongodb_secret.yaml
+
+  # gateway
+  - the_project/manifests/the_project_gatewayclass.yaml
+  - the_project/manifests/the_project_gateway.yaml
+
+  # mongo
   - the_project_mongodb/mongodb_service.yaml
   - the_project_mongodb/mongodb_statefulset.yaml
-  - the_project/manifests/configmap.yaml
+
+  # route
+  - the_project/manifests/the_project_httproute.yaml
+
+  # finally the app
   - the_project/manifests/service_todo_backend.yaml
   - the_project/manifests/service_todo.yaml
-  - the_project/manifests/ingress.yaml
   - the_project/manifests/deployment.yaml
+
+  # and the cron jobs
   - the_project_cronjob/cronjob.yaml
-  - the_project_mongodb_backup_job/mongodb_backup_cronjob.yaml
