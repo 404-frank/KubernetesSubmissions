@@ -33,6 +33,28 @@ spec:
           volumeMounts:
             - name: shared-image
               mountPath: /var/lib/mongodb/data
+          livenessProbe:
+                    exec:
+                      command:
+                        - mongosh
+                        - --eval
+                        - "db.adminCommand('ping')"
+                    initialDelaySeconds: 20
+                    periodSeconds: 10
+                    timeoutSeconds: 5
+                    successThreshold: 1
+                    failureThreshold: 6
+          readinessProbe:
+                    exec:
+                      command:
+                        - mongosh
+                        - --eval
+                        - "db.adminCommand('ping')"
+                    initialDelaySeconds: 20
+                    periodSeconds: 10
+                    timeoutSeconds: 5
+                    successThreshold: 1
+                    failureThreshold: 6
       volumes:
         - name: shared-image
           persistentVolumeClaim:

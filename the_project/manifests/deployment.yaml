@@ -19,15 +19,35 @@ spec:
             claimName: the-project-claim
       containers:
         - name: todo-app
-          image: twodogwalker/todo-app:0.31
+          image: twodogwalker/todo-app:0.33
           volumeMounts:
           - name: shared-image
             mountPath: /usr/app/static/sharedfiles
           envFrom:
             - configMapRef:
                 name: the-project-configmap
+          startupProbe:
+            httpGet:
+               path: /healthz
+               port: 3000
+            initialDelaySeconds: 20
+            periodSeconds: 5
+            failureThreshold: 30  # 5 * 30 = 150 seconds max startup
+            timeoutSeconds: 5
+          livenessProbe:
+            periodSeconds: 10 # How often to test
+            httpGet:
+               path: /healthz
+               port: 3000
+            failureThreshold: 1
+          readinessProbe:
+            initialDelaySeconds: 25 # Initial delay until the livenessProbe is tested
+            periodSeconds: 20 # How often to test
+            httpGet:
+               path: /healthz
+               port: 3000
         - name: todo-app-backend
-          image: twodogwalker/todo-app-backend:0.14
+          image: twodogwalker/todo-app-backend:0.16
           env:
             - name: MONGODB_PASSWORD
               valueFrom:
@@ -37,6 +57,26 @@ spec:
           envFrom:
             - configMapRef:
                 name: the-project-configmap
+          startupProbe:
+            httpGet:
+               path: /healthz
+               port: 3001
+            initialDelaySeconds: 20
+            periodSeconds: 5
+            failureThreshold: 30  # 5 * 30 = 150 seconds max startup
+            timeoutSeconds: 5
+          livenessProbe:
+            periodSeconds: 10 # How often to test
+            httpGet:
+               path: /healthz
+               port: 3001
+            failureThreshold: 1
+          readinessProbe:
+            initialDelaySeconds: 25 # Initial delay until the livenessProbe is tested
+            periodSeconds: 20 # How often to test
+            httpGet:
+               path: /healthz
+               port: 3001
 #      only necessary when the mount needs to be reactivated
       initContainers:
       - name: volume-mount-hack

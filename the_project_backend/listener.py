@@ -18,7 +18,14 @@ class SimpleHTTPRequestHandler(BaseHTTPRequestHandler):
             self.send_header('Content-type', content_type)
             self.end_headers()
             self.wfile.write(self.create_response("200 OK"))
-        if self.path == '/todos':
+        elif self.path == '/healthz':
+            print(f"got a connection on {self.path}, health check")
+            database_healthy = globals.check_database_health()
+            self.send_response(200 if database_healthy else 500)
+            self.send_header('Content-type', content_type)
+            self.end_headers()
+            self.wfile.write(self.create_response("200 OK" if database_healthy else "500 NOT OK"))
+        elif self.path == '/todos':
             print(f"got a GET connection on {self.path}")
             self.send_response(200)
             self.send_header('Content-type', content_type)

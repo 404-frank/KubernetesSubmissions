@@ -16,7 +16,7 @@ class SimpleHTTPRequestHandler(BaseHTTPRequestHandler):
             self.end_headers()
             self.wfile.write(self.create_response("200 OK"))
         # health check
-        if self.path == '/healthz':
+        elif self.path == '/healthz':
             print(f"got a connection on {self.path}, health check")
             database_healthy = globals.check_database_health()
             self.send_response(200 if database_healthy else 500)

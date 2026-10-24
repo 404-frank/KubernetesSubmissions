@@ -35,3 +35,11 @@ def get_todos() -> list:
     # client.close()
     return [t['title'] for t in todo_list]
 
+def check_database_health() -> bool:
+    try:
+        client = MongoClient(URI)
+        client.admin.command('ping')
+        return True
+    except ConnectionFailure:
+        print("Server not available")
+        return False

@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, jsonify
 import views
 import os
 
@@ -9,6 +9,11 @@ print(f"Flask server is starting, listening on port: [{listening_url}:{listening
 
 
 app = Flask(__name__)
+
+@app.route('/healthz')
+def healthz():
+    return jsonify({"status": "ok"}), 200
+
 app.add_url_rule('/', view_func=views.index, methods=['GET', 'POST'])
 
 
