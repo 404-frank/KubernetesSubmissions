@@ -44,3 +44,4 @@
 
 ### Chapter 5 exercises
 - [4.1](https://github.com/404-frank/KubernetesSubmissions/tree/4.1/log_output)
+- [4.2](https://github.com/404-frank/KubernetesSubmissions/tree/4.2/the_project)
