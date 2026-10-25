@@ -6,7 +6,7 @@ LOCAL_IMAGE_WEBSERVER_URL = os.environ['LOCAL_IMAGE_WEBSERVER_URL']
 REMOTE_IMAGE_RETRIEVAL_URL = os.environ['REMOTE_IMAGE_RETRIEVAL_URL']
 
 def get_image_url():
-    if image_too_old(os.environ['LOCAL_IMAGE_STORE_URL']):
+    if image_too_old(LOCAL_IMAGE_STORE_URL):
         # get new one
         retrieve_new_image()
     return LOCAL_IMAGE_WEBSERVER_URL
@@ -16,14 +16,13 @@ def image_too_old(imageFileName: str) -> bool:
     if os.path.isfile(imageFileName):
         mtime = datetime.fromtimestamp(os.path.getmtime(imageFileName))
         time_diff_seconds = int((datetime.now() - mtime).total_seconds())
-        # print(time_diff_seconds)
         return time_diff_seconds > 600
     return True
 
 def retrieve_new_image():
     response = requests.get(REMOTE_IMAGE_RETRIEVAL_URL, headers={"User-Agent": "Mozilla/5.0"})
     image_data = response.content
-    with open(os.environ['LOCAL_IMAGE_STORE_URL'], 'wb') as handler:
+    with open(LOCAL_IMAGE_STORE_URL, 'wb') as handler:
         handler.write(image_data)
 
 def get_todos() -> list:
