@@ -22,10 +22,20 @@ def add_todo(todo_title : str):
     client = MongoClient(MONGODB_URI)
     database = client.get_database("mooc")
     todo_collection = database.get_collection("todo")
-    todo = { "id": 1, "title": todo_title,  "entry_date" : datetime.now()}
+    next_id = get_next_id(todo_collection)
+    todo = { "id": next_id, "title": todo_title, "entry_date": datetime.now(), "done": False }
     result = todo_collection.insert_one(todo)
     print(f"result: {result}")
     client.close()
+
+def get_next_id(col):
+    num_records = col.count_documents({})
+    max_id = 0
+    if num_records > 0:
+        counter = col.find({}, {'_id' : 1, 'id': 1}).sort({'id': -1}).limit(1)
+        max_id = int(counter.next()['id'])
+    max_id += 1
+    return max_id
 
 def main():
     print("start automatic todo creation")

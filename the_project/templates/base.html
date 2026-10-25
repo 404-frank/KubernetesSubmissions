@@ -76,11 +76,61 @@
                 <div class="w-full flex flex-col gap-2 items-left mt-5">
                     <div class="text-2xl mt-5 ml-5">ToDo's</div>
                     {% for todo in todo_list %}
-                    <div class="bg-gray-200 w-full max-w-[750px] border-l-4 border-green-500 pl-4 py-2">
-                        <p class="font-bold text-left">{{todo | safe}}</p>
+                    {% if todo[1] == true %}
+                    <div
+                        class="bg-gray-200 w-full flex justify-center max-w-[750px] rounded-md shadow-md border-l-4 border-gray-500 px-4 py-2">
+                        <div class="w-full items-left">
+                            <p class="font-light line-through text-left">{{todo[2] | safe}}</p>
+                        </div>
+                        <div class="w-full items-right">
+                            <p class="font-extrabold text-green-600 text-right pr-4">Done</p>
+                        </div>
                     </div>
+                    {% else %}
+                    <form id=markDoneForm method="put">
+                        <input type="hidden" id="todo-id" value="{{todo[0]}}"/>
+                        <div
+                            class="bg-gray-200 w-full flex justify-center max-w-[750px] rounded-md shadow-md border-l-4 border-green-500 px-4 py-2">
+                            <div class="w-full items-left">
+                                <p class="font-bold text-left">{{todo[2] | safe}}</p>
+                            </div>
+                            <div class="w-full items-right">
+                                <p class="text-right">
+                                    <button type="submit"
+                                        class="bg-blue-500 text-white px-2 py-1 rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                                        Mark done
+                                    </button>
+                                </p>
+                            </div>
+                        </div>
+                    </form>
+                    {% endif %}
                     {% endfor %}
                 </div>
+
+                <script>
+
+                    const markForm = document.getElementById('markDoneForm');
+
+                    markForm.addEventListener('submit', async (e) => {
+                        e.preventDefault(); // Prevent default form submission (no navigation)
+                        const id = document.getElementById('todo-id').value;
+                        console.log(id)
+                        try {
+                            // Send data to Express server via POST
+                            const response = fetch('/todos/' + id, {
+                                method: 'PUT',
+                                body: JSON.stringify({ 'id': id })
+                            });
+                            const data = await response;
+                            console.log('response ok')
+                            window.location.reload();
+                        } catch (error) {
+                            console.log('fetch gave an error')
+                        }
+                    });
+                </script>
+
 
                 <!-- break_my_day -->
                 <div class="w-full flex flex-col gap-2 items-center mt-5">

@@ -27,7 +27,7 @@ def fail():
     healthy = False
     return render_template('failure.html')
 
-app.add_url_rule('/', view_func=views.index, methods=['GET', 'POST'])
+app.add_url_rule('/', view_func=views.index, methods=['GET', 'POST', 'PUT'])
 
 if __name__ == '__main__':
     app.run(host=listening_url, port=listening_port)

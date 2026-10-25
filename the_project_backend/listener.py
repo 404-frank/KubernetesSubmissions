@@ -6,7 +6,7 @@ from urllib.parse import urlparse, parse_qs
 import globals
 
 HOST = os.environ.get('BACKEND_SERVER_LISTENING_URL', '')
-PORT = int(os.environ.get('BACKEND_SERVER_LISTENING_PORT', '3000'))
+PORT = int(os.environ.get('BACKEND_SERVER_LISTENING_PORT', '3001'))
 
 class SimpleHTTPRequestHandler(BaseHTTPRequestHandler):
 
@@ -30,7 +30,7 @@ class SimpleHTTPRequestHandler(BaseHTTPRequestHandler):
             self.send_response(200)
             self.send_header('Content-type', content_type)
             self.end_headers()
-            body = f"{globals.get_todos()}"
+            body = globals.get_todos()
             self.wfile.write(self.create_response(body))
         else:
             self.send_response(404)
@@ -38,11 +38,21 @@ class SimpleHTTPRequestHandler(BaseHTTPRequestHandler):
             self.end_headers()
             self.wfile.write(self.create_response("path not found"))
 
+    def do_PUT(self):
+        if self.path.startswith('/todos'):
+            print(f"got a connection on {self.path}")
+            todo_id = self.path.split("/")[-1]
+            globals.set_todo_done(todo_id)
+            self.send_response(200)
+            self.send_header('Content-type', "text/html")
+            self.end_headers()
+            self.wfile.write(self.create_response(f"todo with id {todo_id} was set to False"))
+
     def end_headers(self):
         self.send_header('Access-Control-Allow-Origin' , '*')
         self.send_header('Access-Control-Allow-Methods', '*')
         self.send_header('Access-Control-Allow-Headers', '*')
-        self.send_header('Cache-Control'                , 'no-store, no-cache, must-revalidate')
+        self.send_header('Cache-Control', 'no-store, no-cache, must-revalidate')
         return super(SimpleHTTPRequestHandler, self).end_headers()
 
     def do_OPTIONS(self):
@@ -56,8 +66,6 @@ class SimpleHTTPRequestHandler(BaseHTTPRequestHandler):
 
             content_length = int(self.headers.get('Content-Length', 0))
             content_type = self.headers.get('Content-Type', 0)
-            # print(f"content length: {content_length}")
-            # print(f"content type: {content_type}")
             post_data = self.rfile.read(content_length).decode('UTF-8')
             print(f"todo_message_posted : {post_data}")
             todo = json.loads(post_data)['todo']

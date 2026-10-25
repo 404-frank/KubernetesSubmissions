@@ -11,7 +11,7 @@ spec:
         spec:
           containers:
           - name: add-wikipedia-todo
-            image: twodogwalker/todo-app-cronjob:0.5
+            image: twodogwalker/todo-app-cronjob:0.7
             imagePullPolicy: IfNotPresent
             # resources
             resources:
