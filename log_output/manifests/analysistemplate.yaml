@@ -1,0 +1,17 @@
+apiVersion: argoproj.io/v1alpha1
+kind: AnalysisTemplate
+metadata:
+  name: container-cpu-usage
+spec:
+  metrics:
+  - name: container-cpu-usage
+    initialDelay: 5m
+    successCondition: result[0] < 0.10
+    provider:
+      prometheus:
+        # http://prom-prometheus-server.monitoring.svc.cluster.local:9090
+        # http://prom-prometheus-server-5b8559997-4qxxt.monitoring.svc.cluster.local:9090
+        # http://10.42.0.217:9090
+        address: http://10.42.0.217:9090 # currently only working on IP
+        query: |
+            sum(rate (container_cpu_usage_seconds_total{namespace="exercises"}[5m]))

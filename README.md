@@ -46,3 +46,4 @@
 - [4.1](https://github.com/404-frank/KubernetesSubmissions/tree/4.1/log_output)
 - [4.2](https://github.com/404-frank/KubernetesSubmissions/tree/4.2/the_project)
 - [4.3](https://github.com/404-frank/KubernetesSubmissions/tree/4.3/chapter5/exercise_4.3)
+- [4.4](https://github.com/404-frank/KubernetesSubmissions/tree/4.4/chapter5/exercise_4.4)
