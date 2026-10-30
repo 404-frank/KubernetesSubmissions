@@ -1,5 +1,7 @@
 # distributor app
 
+### this sends the todo message to an external API, which URL is defined in the configmap
+
 - depends on a nats server being deployed in the cluster
 - using the_project configMap
 - gets messages from nats queue
