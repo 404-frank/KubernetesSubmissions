@@ -19,7 +19,7 @@ spec:
             claimName: the-project-claim
       containers:
         - name: todo-app
-          image: twodogwalker/todo-app:0.38
+          image: twodogwalker/todo-app:0.39
           volumeMounts:
           - name: shared-image
             mountPath: /usr/app/static/sharedfiles
@@ -47,7 +47,7 @@ spec:
                path: /healthz
                port: 3000
         - name: todo-app-backend
-          image: twodogwalker/todo-app-backend:0.17
+          image: twodogwalker/todo-app-backend:0.27
           env:
             - name: MONGODB_PASSWORD
               valueFrom:

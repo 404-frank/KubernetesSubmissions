@@ -9,7 +9,6 @@ data:
   # if empty URL will lsiten on default Standard loopback interface address (localhost)
   BACKEND_SERVER_LISTENING_URL: ""
   BACKEND_SERVER_LISTENING_PORT: "3001"
-  # BACKEND_SERVER_URL: "http://localhost:3001/todos"
   BACKEND_SERVER_URL: "http://todo-app-backend-service:2346/todos"
   LOCAL_IMAGE_STORE_URL: "/usr/app/static/sharedfiles/temp_image.png"
   LOCAL_IMAGE_WEBSERVER_URL: "/static/sharedfiles/temp_image.png"
@@ -18,6 +17,14 @@ data:
   MONGODB_HOSTNAME: mongodb
   MONGODB_PORT: "27017"
   MONGODB_USERNAME: admin 
-
   # mongodb server
   MONGO_INITDB_ROOT_USERNAME: admin
+
+  # nats server address incl port
+  NATS_URL: "nats://my-nats:4222"
+  # queue to put the todo on
+  NATS_TODO_QUEUE: "distribute"
+  # do we want to distribute to external service? (True for exercise 4.6)
+  DISTRUBUTE_MESSAGE: "True"
+  # external url to submit todo to
+  EXTERNAL_SUBMIT_SERVICE: "https://jsonplaceholder.typicode.com/todos"

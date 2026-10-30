@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: project
+  name: todo-app-distribute-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: todo-app-distribute
+  template:
+    metadata:
+      labels:
+        app: todo-app-distribute
+    spec:
+      containers:
+        - name: todo-app-distribute
+          image: twodogwalker/todo-app-distribute:0.15
+          envFrom:
+            - configMapRef:
+                name: the-project-configmap
