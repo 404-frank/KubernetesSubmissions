@@ -9,7 +9,6 @@ import globals
 
 HOST = os.environ.get('BACKEND_SERVER_LISTENING_URL', '')
 PORT = int(os.environ.get('BACKEND_SERVER_LISTENING_PORT', '3001'))
-# TODO move to ENV var in config map:
 NATS_URL = os.environ.get('NATS_URL', 'nats://my-nats:4222')
 NATS_TODO_QUEUE = os.environ.get('NATS_TODO_QUEUE', 'distribute')
 DISTRUBUTE_MESSAGE = eval(os.environ.get('DISTRUBUTE_MESSAGE', "True"))
