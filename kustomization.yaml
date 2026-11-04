@@ -35,3 +35,9 @@ images:
 - name: PROJECT/IMAGE
   newName: twodogwalker/log-output
   newTag: c89acdc52146a62669f8fd771df5e48f174ae3c0
+- name: PROJECT/IMAGE_BACKEND
+  newName: twodogwalker/todo-app-backend
+  newTag: 8c9ea57857d8b3cd6ca616f55d9362d09bb91e4c
+- name: PROJECT/IMAGE_FRONTEND
+  newName: twodogwalker/todo-app
+  newTag: 8c9ea57857d8b3cd6ca616f55d9362d09bb91e4c
