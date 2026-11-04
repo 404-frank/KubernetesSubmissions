@@ -21,4 +21,4 @@ resources:
 images:
 - name: PROJECT/IMAGE
   newName: twodogwalker/log-output
-  newTag: a085e960c7026337200a16528cdf4a28f077f69c
+  newTag: 6e34b19ddcbdfb761116f986708979189b97afab
