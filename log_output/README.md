@@ -41,3 +41,4 @@ kubectl apply -f manifests/deployment.yaml
 kubectl config set-context --current --namespace=exercises
 
 ```
+
