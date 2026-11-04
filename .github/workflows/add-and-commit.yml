@@ -21,14 +21,17 @@ jobs:
       # tag image with the GitHub SHA to get a unique tag
       - name: Build and publish backend
         run: |-
-          docker build --tag "twodogwalker/log-output:$GITHUB_SHA" ./log_output
-          docker push "twodogwalker/log-output:$GITHUB_SHA"
+          docker build --tag "twodogwalker/todo-app:$GITHUB_SHA" ./the_project
+          docker push "twodogwalker/todo-app:$GITHUB_SHA"
+          docker build --tag "twodogwalker/todo-app-backend:$GITHUB_SHA" ./the_project_backend
+          docker push "twodogwalker/todo-app-backend:$GITHUB_SHA"
 
       - name: Set up Kustomize
         uses: imranismail/setup-kustomize@v3
 
       - name: Use right image
-        run: kustomize edit set image PROJECT/IMAGE=twodogwalker/log-output:$GITHUB_SHA
+        run: kustomize edit set image PROJECT/IMAGE_FRONTEND=twodogwalker/todo-app:$GITHUB_SHA
+        run: kustomize edit set image PROJECT/IMAGE_BACKEND=twodogwalker/todo-app-backend:$GITHUB_SHA
 
       - name: commit kustomization.yaml to GitHub
         uses: EndBug/add-and-commit@v10
