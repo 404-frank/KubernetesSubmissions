@@ -11,7 +11,7 @@ spec:
   template:
     metadata:
       labels:
-        app: log-output-app
+        app: log-output-apphttps://github.com/404-frank/KubernetesSubmissions
     spec:
       volumes:
         - name: shared-files
@@ -19,7 +19,7 @@ spec:
             name: log-output-configmap
       containers:
         - name: log-output-container
-          image: twodogwalker/log-output:0.40
+          image: PROJECT/IMAGE
           imagePullPolicy: IfNotPresent
           envFrom:
             - configMapRef:
