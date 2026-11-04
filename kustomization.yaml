@@ -9,11 +9,12 @@ resources:
 ### and the deployment of the services, ingress, and containers:
   - log_output/manifests/configmap.yaml
   - ping_pong/manifests/configmap.yaml
+  - log_output/manifests/gatewayclass.yaml
+  - log_output/manifests/gateway.yaml
   - log_output/manifests/service.yaml
   - ping_pong/manifests/service.yaml
   - log_output/manifests/ingress.yaml
   - log_output/manifests/deployment.yaml
-  - log_output/manifests/gateway.yaml
   - ping_pong/manifests/route.yaml
   - ping_pong/manifests/route-redirect.yaml
   - log_output/manifests/route.yaml

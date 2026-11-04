@@ -1,20 +1,13 @@
-apiVersion: argoproj.io/v1alpha1
-kind: Rollout
+apiVersion: apps/v1
+kind: Deployment
 metadata:
   namespace: exercises
   name: log-output-deployment
 spec:
-  replicas: 4
+  replicas: 1
   selector:
     matchLabels:
       app: log-output-app
-  strategy:
-    canary:
-      steps:
-      - setWeight: 25
-      - analysis:
-          templates:
-          - templateName: container-cpu-usage
   template:
     metadata:
       labels:
