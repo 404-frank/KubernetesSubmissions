@@ -25,6 +25,6 @@ data:
   # queue to put the todo on
   NATS_TODO_QUEUE: "distribute"
   # do we want to distribute to external service? (True for exercise 4.6)
-  DISTRUBUTE_MESSAGE: "True"
+  DISTRUBUTE_MESSAGE: "False"
   # external url to submit todo to
   EXTERNAL_SUBMIT_SERVICE: "https://jsonplaceholder.typicode.com/todos"

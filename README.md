@@ -50,3 +50,4 @@
 - [4.5](https://github.com/404-frank/KubernetesSubmissions/tree/4.5/the_project)
 - [4.6](https://github.com/404-frank/KubernetesSubmissions/tree/4.6/the_project_distributor)
 - [4.7](https://github.com/404-frank/KubernetesSubmissions/tree/4.7/chapter5/exercise_4.7)
+- [4.8](https://github.com/404-frank/KubernetesSubmissions/tree/4.8/chapter5/exercise_4.8)
