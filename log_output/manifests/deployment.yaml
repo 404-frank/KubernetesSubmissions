@@ -11,7 +11,7 @@ spec:
   template:
     metadata:
       labels:
-        app: log-output-apphttps://github.com/404-frank/KubernetesSubmissions
+        app: log-output-app
     spec:
       volumes:
         - name: shared-files
