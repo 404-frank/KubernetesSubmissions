@@ -1,33 +1,37 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
-resources:
   # lets start with the name spaces:
-  - the_project/manifests/the_project_namespace_gateway.yaml
-  - the_project/manifests/the_project_namespace.yaml
 
   # and some configmaps and secrets
-  - the_project_mongodb/mongodb_secret.yaml
-  - the_project/manifests/configmap.yaml
   
   # persistant volume
-  - the_project/manifests/persistentvolume.yaml
-  - the_project/manifests/persistentvolumeclaim.yaml
 
   # gateway
-  - the_project/manifests/the_project_gatewayclass.yaml
-  - the_project/manifests/the_project_gateway.yaml
 
   # mongo
-  - the_project_mongodb/mongodb_service.yaml
-  - the_project_mongodb/mongodb_statefulset.yaml
 
   # route
-  - the_project/manifests/the_project_httproute.yaml
 
   # finally the app
-  - the_project/manifests/service_todo_backend.yaml
-  - the_project/manifests/service_todo.yaml
-  - the_project/manifests/deployment.yaml
 
   # and the cron jobs
-  - the_project_cronjob/cronjob.yaml
+resources:
+- the_project/manifests/the_project_namespace_gateway.yaml
+- the_project/manifests/the_project_namespace.yaml
+- the_project_mongodb/mongodb_secret.yaml
+- the_project/manifests/configmap.yaml
+- the_project/manifests/persistentvolume.yaml
+- the_project/manifests/persistentvolumeclaim.yaml
+- the_project/manifests/the_project_gatewayclass.yaml
+- the_project/manifests/the_project_gateway.yaml
+- the_project_mongodb/mongodb_service.yaml
+- the_project_mongodb/mongodb_statefulset.yaml
+- the_project/manifests/the_project_httproute.yaml
+- the_project/manifests/service_todo_backend.yaml
+- the_project/manifests/service_todo.yaml
+- the_project/manifests/deployment.yaml
+- the_project_cronjob/cronjob.yaml
+images:
+- name: PROJECT/IMAGE
+  newName: twodogwalker/log-output
+  newTag: c89acdc52146a62669f8fd771df5e48f174ae3c0
