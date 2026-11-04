@@ -1,0 +1,24 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+  # all deployments for log_output, and pingpong app
+  # persistant volume
+
+### and the deployment of the services, ingress, and containers:
+resources:
+- log_output/manifests/persistentvolume.yaml
+- log_output/manifests/persistentvolumeclaim.yaml
+- log_output/manifests/configmap.yaml
+- ping_pong/manifests/configmap.yaml
+- log_output/manifests/gatewayclass.yaml
+- log_output/manifests/gateway.yaml
+- log_output/manifests/service.yaml
+- ping_pong/manifests/service.yaml
+- log_output/manifests/ingress.yaml
+- log_output/manifests/deployment.yaml
+- ping_pong/manifests/route.yaml
+- ping_pong/manifests/route-redirect.yaml
+- log_output/manifests/route.yaml
+images:
+- name: PROJECT/IMAGE
+  newName: twodogwalker/log-output
+  newTag: a085e960c7026337200a16528cdf4a28f077f69c
