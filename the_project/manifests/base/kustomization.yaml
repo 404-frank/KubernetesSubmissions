@@ -1,29 +1,29 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 
-resources:
   #- namespaces.yaml
-  - configmap.yaml
-  - mongodb_secret.yaml
-  - persistentvolume.yaml
-  - persistentvolumeclaim.yaml
-  - gatewayclass.yaml
-  - gateway.yaml
-  - mongodb_service.yaml
-  - mongodb_statefulset.yaml
-  - httproute.yaml
-  - service_todo_backend.yaml
-  - service_todo.yaml
-  - cronjob.yaml
-  - mongodb_backup_cronjob.yaml
-  - deployment.yaml
+resources:
+- configmap.yaml
+- mongodb_secret.yaml
+- persistentvolume.yaml
+- persistentvolumeclaim.yaml
+- gatewayclass.yaml
+- gateway.yaml
+- mongodb_service.yaml
+- mongodb_statefulset.yaml
+- httproute.yaml
+- service_todo_backend.yaml
+- service_todo.yaml
+- cronjob.yaml
+- mongodb_backup_cronjob.yaml
+- deployment.yaml
 images:
 - name: PROJECT/IMAGE_BACKEND
   newName: twodogwalker/todo-app-backend
-  newTag: 3fd7478b0b9e41312dd91d87405c3ff452a4686b
-- name: PROJECT/IMAGE_FRONTEND
-  newName: twodogwalker/todo-app
-  newTag: 3fd7478b0b9e41312dd91d87405c3ff452a4686b
+  newTag: 0f520cf628192b2936e20074594c16ccac4d3ff8
 - name: PROJECT/IMAGE_DISTRIBUTOR
   newName: twodogwalker/todo-app-distribute
-  newTag: xxxxxx
+  newTag: 0f520cf628192b2936e20074594c16ccac4d3ff8
+- name: PROJECT/IMAGE_FRONTEND
+  newName: twodogwalker/todo-app
+  newTag: 0f520cf628192b2936e20074594c16ccac4d3ff8
