@@ -33,6 +33,7 @@ jobs:
 
       - name: Use right image
         run: |-
+          cd the_project/manifests/base
           kustomize edit set image PROJECT/IMAGE_FRONTEND=twodogwalker/todo-app:$GITHUB_SHA
           kustomize edit set image PROJECT/IMAGE_BACKEND=twodogwalker/todo-app-backend:$GITHUB_SHA
           kustomize edit set image PROJECT/IMAGE_DISTRIBUTOR=twodogwalker/todo-app-distribute:$GITHUB_SHA
