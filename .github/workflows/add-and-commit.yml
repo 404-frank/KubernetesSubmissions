@@ -25,6 +25,8 @@ jobs:
           docker push "twodogwalker/todo-app:$GITHUB_SHA"
           docker build --tag "twodogwalker/todo-app-backend:$GITHUB_SHA" ./the_project_backend
           docker push "twodogwalker/todo-app-backend:$GITHUB_SHA"
+          docker build --tag "twodogwalker/todo-app-distribute:$GITHUB_SHA" ./the_project_distributor
+          docker push "twodogwalker/todo-app-distribute:$GITHUB_SHA"
 
       - name: Set up Kustomize
         uses: imranismail/setup-kustomize@v3
@@ -33,6 +35,7 @@ jobs:
         run: |-
           kustomize edit set image PROJECT/IMAGE_FRONTEND=twodogwalker/todo-app:$GITHUB_SHA
           kustomize edit set image PROJECT/IMAGE_BACKEND=twodogwalker/todo-app-backend:$GITHUB_SHA
+          kustomize edit set image PROJECT/IMAGE_DISTRIBUTOR=twodogwalker/todo-app-distribute:$GITHUB_SHA
 
       - name: commit kustomization.yaml to GitHub
         uses: EndBug/add-and-commit@v10
