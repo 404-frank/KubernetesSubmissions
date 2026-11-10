@@ -9,6 +9,7 @@ NATS_URL = os.environ.get('NATS_URL', 'nats://my-nats:4222')
 NATS_TODO_QUEUE = os.environ.get('NATS_TODO_QUEUE', 'distribute')
 EXTERNAL_SUBMIT_SERVICE = os.environ.get('EXTERNAL_SUBMIT_SERVICE',
  'https://jsonplaceholder.typicode.com/todos')
+LOG_DO_NOT_SEND = eval(os.environ.get('LOG_DO_NOT_SEND', "True"))
 
 print("starting Distributor service...")
 
@@ -26,12 +27,15 @@ async def main() -> None:
 def send_to_jsonPlaceHolder(payload: str):
     headers = {'Content-type': 'application/json'}
     try:
-        print(f'Submitting todo to jsonplaceholder site')
-        response = requests.post(EXTERNAL_SUBMIT_SERVICE, json=payload, headers=headers)
-        response.raise_for_status()  # Raise HTTPError for bad responses (4xx or 5xx)
-        response_data = response.json()
-        print(f'Response Data: {response_data}')
-        print(f'Status Code: {response.status_code}')
+        if LOG_DO_NOT_SEND:
+            print(f'Not submitting to the external endpoint, just log.')
+        else:
+            print(f'Submitting todo to jsonplaceholder site')
+            response = requests.post(EXTERNAL_SUBMIT_SERVICE, json=payload, headers=headers)
+            response.raise_for_status()  # Raise HTTPError for bad responses (4xx or 5xx)
+            response_data = response.json()
+            print(f'Response Data: {response_data}')
+            print(f'Status Code: {response.status_code}')
     except requests.exceptions.HTTPError as errh:
         print(f'HTTP Error: {errh}')
     except requests.exceptions.ConnectionError as errc:

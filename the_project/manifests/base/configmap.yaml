@@ -1,7 +1,6 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  namespace: project
   name: the-project-configmap
 data:
   SERVER_LISTENING_URL: "0.0.0.0"
@@ -25,6 +24,7 @@ data:
   # queue to put the todo on
   NATS_TODO_QUEUE: "distribute"
   # do we want to distribute to external service? (True for exercise 4.6)
-  DISTRUBUTE_MESSAGE: "False"
+  DISTRIBUTE_MESSAGE: "True"
+  #LOG_DO_NOT_SEND: "True"
   # external url to submit todo to
   EXTERNAL_SUBMIT_SERVICE: "https://jsonplaceholder.typicode.com/todos"

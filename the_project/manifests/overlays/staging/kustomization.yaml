@@ -1,0 +1,24 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+resources:
+- ./../../base
+- namespace.yaml
+
+patches:
+  - path: mongodb_backup_cronjob.yaml
+
+configMapGenerator:
+  - name: the-project-configmap
+    behavior: merge
+    literals:
+      - LOG_DO_NOT_SEND="True"
+
+transformers:
+  - |-
+    apiVersion: builtin
+    kind: NamespaceTransformer
+    metadata:
+      name: notImportantHere
+      namespace: project-staging
+    unsetOnly: true

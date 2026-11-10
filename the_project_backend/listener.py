@@ -11,7 +11,7 @@ HOST = os.environ.get('BACKEND_SERVER_LISTENING_URL', '')
 PORT = int(os.environ.get('BACKEND_SERVER_LISTENING_PORT', '3001'))
 NATS_URL = os.environ.get('NATS_URL', 'nats://my-nats:4222')
 NATS_TODO_QUEUE = os.environ.get('NATS_TODO_QUEUE', 'distribute')
-DISTRUBUTE_MESSAGE = eval(os.environ.get('DISTRUBUTE_MESSAGE', "True"))
+DISTRIBUTE_MESSAGE = eval(os.environ.get('DISTRIBUTE_MESSAGE', "True"))
 
 class SimpleHTTPRequestHandler(BaseHTTPRequestHandler):
 
@@ -52,7 +52,7 @@ class SimpleHTTPRequestHandler(BaseHTTPRequestHandler):
             self.send_header('Content-type', "text/html")
             self.end_headers()
             self.wfile.write(self.create_response(f"todo with id {todo_id} was set to False"))
-            if DISTRUBUTE_MESSAGE:
+            if DISTRIBUTE_MESSAGE:
                 # send todoRecord to distributor
                 asyncio.run(self.distributeMessage({'entry_date': datetime.datetime.now(), 'title': "entry was set to done", 'id': todo_id, 'done': True}))
 
@@ -88,7 +88,7 @@ class SimpleHTTPRequestHandler(BaseHTTPRequestHandler):
                 self.send_header('Content-type', "text/html")
                 self.end_headers()
                 self.wfile.write(self.create_response("ok"))
-                if DISTRUBUTE_MESSAGE:
+                if DISTRIBUTE_MESSAGE:
                     # send todoRecord to distributor
                     asyncio.run(self.distributeMessage(todoRecord))
                 

@@ -1,0 +1,8 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: mongodb-backup
+spec:
+  jobTemplate:
+    spec:
+      suspend: true
