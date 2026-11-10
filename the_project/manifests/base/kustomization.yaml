@@ -17,11 +17,13 @@ resources:
   - cronjob.yaml
   - mongodb_backup_cronjob.yaml
   - deployment.yaml
-  - deployment_distributor.yaml
 images:
 - name: PROJECT/IMAGE_BACKEND
   newName: twodogwalker/todo-app-backend
-  newTag: 1323ef52381f1b8be55250f634d42101f55dea8e
+  newTag: 3fd7478b0b9e41312dd91d87405c3ff452a4686b
 - name: PROJECT/IMAGE_FRONTEND
   newName: twodogwalker/todo-app
-  newTag: 1323ef52381f1b8be55250f634d42101f55dea8e
+  newTag: 3fd7478b0b9e41312dd91d87405c3ff452a4686b
+- name: PROJECT/IMAGE_DISTRIBUTOR
+  newName: twodogwalker/todo-app-distribute
+  newTag: xxxxxx

@@ -20,7 +20,7 @@ data:
   MONGO_INITDB_ROOT_USERNAME: admin
 
   # nats server address incl port
-  NATS_URL: "nats://my-nats:4222"
+  NATS_URL: "nats://my-nats.nats:4222"
   # queue to put the todo on
   NATS_TODO_QUEUE: "distribute"
   # do we want to distribute to external service? (True for exercise 4.6)
