@@ -20,7 +20,7 @@ resources:
 images:
 - name: PROJECT/IMAGE_BACKEND
   newName: twodogwalker/todo-app-backend
-  newTag: c4580a171cb8ea68fb21b17e606c5f41d09f02ce
+  newTag: 3fd7478b0b9e41312dd91d87405c3ff452a4686b
 - name: PROJECT/IMAGE_FRONTEND
   newName: twodogwalker/todo-app
-  newTag: c4580a171cb8ea68fb21b17e606c5f41d09f02ce
+  newTag: 3fd7478b0b9e41312dd91d87405c3ff452a4686b
