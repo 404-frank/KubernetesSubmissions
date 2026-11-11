@@ -1,13 +1,13 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: the-project-staging
+  name: the-project-production
   namespace: argocd
 spec:
-  project: the_project
+  project: default
   source:
-    repoURL: https://github.com/404-frank/KubernetesSubmissions/tree/main/the_project
-    path: overlays/production
+    repoURL: https://github.com/404-frank/KubernetesSubmissions/
+    path: ./the_project/manifests/overlays/staging
     targetRevision: prod
   destination:
     server: https://kubernetes.default.svc
