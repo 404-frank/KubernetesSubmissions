@@ -8,6 +8,8 @@
 - added switch to the backend to be able not to send to an external url, just log
 
 ### commands:
+- kubectl apply -n argocd -f manifests/argocd-staging-app.yaml
+
 - running the argoCD service:
 ```
 - kubectl patch svc argocd-server -n argocd -p '{"spec": {"type": "LoadBalancer"}}'
