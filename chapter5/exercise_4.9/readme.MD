@@ -25,6 +25,10 @@ kubectl apply -k manifests/overlays/staging/
 kubectl apply -k manifests/overlays/production/
 ```
 
+git commit -m "working on exercise 4.9 #5"
+git tag prod -a -m "tagging prod"
+git push --atomic origin main prod
+
 
 ### results:
 

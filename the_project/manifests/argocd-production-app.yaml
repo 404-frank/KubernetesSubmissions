@@ -7,7 +7,7 @@ spec:
   project: default
   source:
     repoURL: https://github.com/404-frank/KubernetesSubmissions/
-    path: ./the_project/manifests/overlays/staging
+    path: ./the_project/manifests/overlays/production
     targetRevision: prod
   destination:
     server: https://kubernetes.default.svc
